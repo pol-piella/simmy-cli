@@ -13,7 +13,7 @@ module.exports = new Command()
         const bootedDevices = await getAvailableDevices(true)
 
         if (!bootedDevices.length) {
-            console.error("No booted devices could be found!")
+            console.error("⚠️  No booted devices could be found!")
             return
         }
 
