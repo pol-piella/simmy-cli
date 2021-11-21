@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
+const COMMANDS = require("./commands")
 const { Command } = require("commander")
-
-const COMMANDS = [require("./commands/push")]
 
 const program = new Command()
 

@@ -11,6 +11,12 @@ module.exports = new Command()
     .argument("bundle identifier", "Enter the bundle identifier for the app")
     .action(async (bundleIdentifier) => {
         const bootedDevices = await getAvailableDevices(true)
+
+        if (!bootedDevices.length) {
+            console.error("No booted devices could be found!")
+            return
+        }
+
         const selectedDeviceName = await picker({
             name: "Device Picker",
             message: "Select a device first",
