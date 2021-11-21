@@ -5,6 +5,22 @@ const fs = require("fs")
 const shell = require("../../services/shell")
 const { form, picker } = require("../../inputHooks")
 
+const uuidSelectedByUser = async () => {
+    const selectedDeviceName = await picker({
+        name: "Device Picker",
+        message: "Select a device first",
+        choices: bootedDevices.map((device) => {
+            return {
+                name: device.name,
+                value: device.udid,
+            }
+        }),
+    })
+    return bootedDevices.filter(
+        (device) => device.name === selectedDeviceName
+    )[0].udid
+}
+
 module.exports = new Command()
     .command("push")
     .description("Generate a deeplink for the given identifier")
@@ -17,20 +33,10 @@ module.exports = new Command()
             return
         }
 
-        const selectedDeviceName = await picker({
-            name: "Device Picker",
-            message: "Select a device first",
-            choices: bootedDevices.map((device) => {
-                return {
-                    name: device.name,
-                    value: device.udid,
-                }
-            }),
-        })
-
-        const selectedDeviceUUID = bootedDevices.filter(
-            (device) => device.name === selectedDeviceName
-        )[0].udid
+        const selectedDeviceUUID =
+            bootedDevices.length === 1
+                ? bootedDevices[0].udid
+                : await uuidSelectedByUser()
 
         const { title, body, sound } = await form({
             name: "apns body",
@@ -60,10 +66,10 @@ module.exports = new Command()
             `{
                 "aps": {
                     "alert": {
-                        "title": ${title},
-                        "body": ${body}
+                        "title": "${title}",
+                        "body": "${body}"
                     },
-                    "sound": ${sound}
+                    "sound": "${sound}"
                 },
             }`
         )
