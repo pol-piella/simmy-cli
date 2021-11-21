@@ -1,3 +1,5 @@
+// @ts-check
+
 const { Command } = require("commander")
 const { getAvailableDevices } = require("../../services/devices")
 const tmp = require("tmp")
@@ -5,7 +7,7 @@ const fs = require("fs")
 const shell = require("../../services/shell")
 const { form, picker } = require("../../inputHooks")
 
-const uuidSelectedByUser = async () => {
+const uuidSelectedByUser = async (bootedDevices) => {
     const selectedDeviceName = await picker({
         name: "Device Picker",
         message: "Select a device first",
@@ -26,7 +28,11 @@ module.exports = new Command()
     .description("Generate a deeplink for the given identifier")
     .argument("bundle identifier", "Enter the bundle identifier for the app")
     .action(async (bundleIdentifier) => {
-        const bootedDevices = await getAvailableDevices(true)
+        const response = await getAvailableDevices(["iOS"], true)
+
+        const bootedDevices = Object.keys(response).flatMap((key) => {
+            return response[key]
+        })
 
         if (!bootedDevices.length) {
             console.error("⚠️  No booted devices could be found!")
@@ -36,7 +42,7 @@ module.exports = new Command()
         const selectedDeviceUUID =
             bootedDevices.length === 1
                 ? bootedDevices[0].udid
-                : await uuidSelectedByUser()
+                : await uuidSelectedByUser(bootedDevices)
 
         const { title, body, sound } = await form({
             name: "apns body",
