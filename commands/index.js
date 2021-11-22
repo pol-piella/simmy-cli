@@ -2,5 +2,6 @@ module.exports = [
     require("./push"),
     require("./list"),
     require("./boot"),
-    require("./screenshot"),
+    require("./pic"),
+    require("./rec"),
 ]
