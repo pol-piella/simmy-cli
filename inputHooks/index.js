@@ -1,4 +1,4 @@
-const { Form, Select } = require("enquirer")
+const { Form, Select, MultiSelect } = require("enquirer")
 
 const picker = async ({ name, message, choices }) => {
     const prompt = new Select({
@@ -15,4 +15,9 @@ const form = async ({ name, message, choices }) => {
     return await prompt.run()
 }
 
-module.exports = { form, picker }
+const multiSelect = async ({ name, message, choices }) => {
+    const prompt = new MultiSelect({ name, message, choices })
+    return await prompt.run()
+}
+
+module.exports = { form, picker, multiSelect }

@@ -1,1 +1,1 @@
-module.exports = [require("./push")]
+module.exports = [require("./push"), require("./list")]
