@@ -1,1 +1,6 @@
-module.exports = [require("./push"), require("./list"), require("./boot")]
+module.exports = [
+    require("./push"),
+    require("./list"),
+    require("./boot"),
+    require("./screenshot"),
+]

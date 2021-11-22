@@ -1,48 +1,18 @@
 // @ts-check
 
 const { Command } = require("commander")
-const { getAvailableDevices } = require("../../services/devices")
 const tmp = require("tmp")
 const fs = require("fs")
 const shell = require("../../services/shell")
-const { form, picker } = require("../../inputHooks")
-
-const uuidSelectedByUser = async (bootedDevices) => {
-    const selectedDeviceName = await picker({
-        name: "Device Picker",
-        message: "Select a device first",
-        choices: bootedDevices.map((device) => {
-            return {
-                name: device.name,
-                value: device.udid,
-            }
-        }),
-    })
-    return bootedDevices.filter(
-        (device) => device.name === selectedDeviceName
-    )[0].udid
-}
+const { form } = require("../../inputHooks")
+const selectedDevice = require("../booted-devices")
 
 module.exports = new Command()
     .command("push")
     .description("Generate a deeplink for the given identifier")
     .argument("bundle identifier", "Enter the bundle identifier for the app")
     .action(async (bundleIdentifier) => {
-        const response = await getAvailableDevices(["iOS"], true)
-
-        const bootedDevices = Object.keys(response).flatMap((key) => {
-            return response[key]
-        })
-
-        if (!bootedDevices.length) {
-            console.error("⚠️  No booted devices could be found!")
-            return
-        }
-
-        const selectedDeviceUUID =
-            bootedDevices.length === 1
-                ? bootedDevices[0].udid
-                : await uuidSelectedByUser(bootedDevices)
+        const { udid } = await selectedDevice()
 
         const { title, body, sound } = await form({
             name: "apns body",
@@ -81,7 +51,7 @@ module.exports = new Command()
         )
 
         await shell(
-            `xcrun simctl push "${selectedDeviceUUID}" ${bundleIdentifier} ${tmpFile.name}`
+            `xcrun simctl push "${udid}" ${bundleIdentifier} ${tmpFile.name}`
         )
 
         tmpFile.removeCallback()
