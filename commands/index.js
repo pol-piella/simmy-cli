@@ -4,4 +4,5 @@ module.exports = [
     require("./boot"),
     require("./pic"),
     require("./rec"),
+    require("./locale"),
 ]
