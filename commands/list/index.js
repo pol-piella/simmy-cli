@@ -9,7 +9,6 @@ module.exports = new Command()
     .description("Get a list of devices ")
     .option("-b, --booted", "Only show booted devices")
     .action(async ({ booted }) => {
-        console.log(booted)
         const selectedPlatforms = await multiSelect({
             name: "platforms",
             message:
