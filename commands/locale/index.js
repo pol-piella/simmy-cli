@@ -20,7 +20,6 @@ module.exports = new Command()
             `plutil -replace AppleLanguages -json "[ \\"${language}\\" ]" ${path}`
         )
 
-        // TODO: This reboot can be moved into its own command
         console.log(`🔄  Rebooting simulator...`)
         await shell(`xcrun simctl shutdown ${udid}`)
         await shell(`xcrun simctl boot ${udid}`)

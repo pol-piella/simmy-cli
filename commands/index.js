@@ -6,4 +6,5 @@ module.exports = [
     require("./rec"),
     require("./locale"),
     require("./shutdown"),
+    require("./reboot"),
 ]
