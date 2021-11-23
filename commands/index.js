@@ -5,4 +5,5 @@ module.exports = [
     require("./pic"),
     require("./rec"),
     require("./locale"),
+    require("./shutdown"),
 ]
