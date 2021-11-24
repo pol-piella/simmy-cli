@@ -1,18 +1,15 @@
 {
     "name": "simmy",
     "version": "1.0.0",
-    "description": "",
+    "description": "📱 A user-friendly wrapper around the simctl interface, which allows you to talk to simulators in a very modern fashion.",
     "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "",
+    "author": "Pol Piella Abadia <hi@polpiella.dev> (https://polpiella.dev)",
     "license": "ISC",
     "dependencies": {
-        "commander": "^8.3.0",
-        "enquirer": "^2.3.6",
-        "lodash": "^4.17.21",
-        "tmp": "^0.2.1"
+        "commander": "8.3.0",
+        "enquirer": "2.3.6",
+        "lodash": "4.17.21",
+        "tmp": "0.2.1"
     },
     "bin": "./index.js"
 }
