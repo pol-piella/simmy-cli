@@ -7,4 +7,5 @@ module.exports = [
     require("./locale"),
     require("./shutdown"),
     require("./reboot"),
+    require("./deeplink"),
 ]
