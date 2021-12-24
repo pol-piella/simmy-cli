@@ -40,8 +40,7 @@ module.exports = new Command()
         )
 
         await shell(`xcrun simctl boot ${deviceToBoot.udid}`)
-
-        console.log(
-            `ℹ️  Booted ${deviceToBoot.name}, if you can't see it make sure you have the simulator app running`
-        )
+        
+        const { stdout: developerPath  } = await shell('xcode-select --print-path')
+        await shell(`open ${developerPath.trim()}/Applications/Simulator.app`)
     })
