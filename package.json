@@ -12,5 +12,14 @@
         "lodash": "4.17.21",
         "tmp": "0.2.1"
     },
-    "bin": "./index.js"
+    "bin": "./index.js",
+    "devDependencies": {
+        "standard": "^16.0.4"
+    },
+    "scripts": {
+        "lint": "standard --fix"
+    },
+    "eslintConfig": {
+        "extends": "standard"
+    }
 }
