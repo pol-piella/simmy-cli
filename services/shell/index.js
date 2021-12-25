@@ -1,5 +1,5 @@
 const { promisify } = require('util')
-const chalk = require('chalk')
+const { error } = require('../output')
 
 const exec = promisify(require('child_process').exec)
 
@@ -8,6 +8,6 @@ module.exports = async (command) => {
     const { stdout } = await exec(command)
     return stdout
   } catch ({ stderr }) {
-    console.log(chalk.red(stderr))
+    error(stderr)
   }
 }

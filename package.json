@@ -14,15 +14,23 @@
     },
     "bin": "./index.js",
     "devDependencies": {
-        "standard": "^16.0.4",
-        "vitest": "0.0.113"
+        "jest": "^27.4.5",
+        "standard": "^16.0.4"
     },
     "scripts": {
-        "lint": "standard --fix",
-        "test": "vitest",
-        "coverage": "vitest --coverage"
+        "lint": "standard",
+        "lint:fix": "standard --fix",
+        "test": "jest",
+        "coverage": "jest --coverage"
     },
     "eslintConfig": {
-        "extends": "standard"
+        "extends": "standard",
+        "env": {
+            "node": true,
+            "jest": true
+        }
+    },
+    "standard": {
+        "envs": ["jest"]
     }
 }
