@@ -77,8 +77,14 @@ const EXPECTED_RESULT = {
   ]
 }
 
-test('should be always true', async () => {
+test('Test response returns all device architectures', async () => {
   shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices(['iOS', 'watchOS', 'tvOS'], false)
   expect(deviceList).toStrictEqual(EXPECTED_RESULT)
+})
+
+test('Test passing no arch returns an empty array', async () => {
+  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
+  const deviceList = await getAvailableDevices([], false)
+  expect(deviceList).toStrictEqual({})
 })
