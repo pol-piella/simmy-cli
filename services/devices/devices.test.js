@@ -83,7 +83,7 @@ test('Test response returns all device architectures', async () => {
   expect(deviceList).toStrictEqual(EXPECTED_RESULT)
 })
 
-test('Test passing no arch returns an empty array', async () => {
+test('Test that an empty object is returned when passing no arch', async () => {
   shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices([], false)
   expect(deviceList).toStrictEqual({})
