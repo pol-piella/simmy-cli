@@ -6,6 +6,7 @@
     "author": "Pol Piella Abadia <hi@polpiella.dev> (https://polpiella.dev)",
     "license": "ISC",
     "dependencies": {
+        "chalk": "4.1.2",
         "commander": "8.3.0",
         "enquirer": "2.3.6",
         "lodash": "4.17.21",

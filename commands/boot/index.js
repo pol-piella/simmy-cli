@@ -38,9 +38,9 @@ module.exports = new Command()
         const deviceToBoot = devices[selectedVersion].find(
             ({ name }) => name === selectedDevice
         )
-
+        
         await shell(`xcrun simctl boot ${deviceToBoot.udid}`)
         
-        const { stdout: developerPath  } = await shell('xcode-select --print-path')
+        const developerPath = await shell('xcode-select --print-path')
         await shell(`open ${developerPath.trim()}/Applications/Simulator.app`)
     })

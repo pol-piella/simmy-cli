@@ -6,12 +6,12 @@ const _ = require("lodash")
  * @param {boolean} booted - Whether the device must be booted
  */
 const getAvailableDevices = async (platforms, booted) => {
-    const { stderr, stdout } = await shell("xcrun simctl list -j")
-    if (!stdout) {
+    const simulatorList = await shell("xcrun simctl list -j")
+    if (!simulatorList) {
         throw new Error("No booted device could be found!")
     }
 
-    const { devices } = JSON.parse(stdout)
+    const { devices } = JSON.parse(simulatorList)
 
     const mappedDevices = _.mapKeys(devices, (_, key) => {
         return key.replace("com.apple.CoreSimulator.SimRuntime.", "")
