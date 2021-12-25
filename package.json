@@ -29,8 +29,5 @@
             "node": true,
             "jest": true
         }
-    },
-    "standard": {
-        "envs": ["jest"]
     }
 }
