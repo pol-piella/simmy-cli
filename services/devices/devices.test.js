@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const shell = require('../shell')
 const { getAvailableDevices } = require('./index.js')
 
