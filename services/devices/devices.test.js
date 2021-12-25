@@ -34,7 +34,7 @@ const MOCK_RESPONSE = {
         udid: '39C9E001-798A-45B9-A7F1-4B6D4C43D6B7',
         isAvailable: true,
         deviceTypeIdentifier: 'com.apple.CoreSimulator.SimDeviceType.iPhone-8',
-        state: 'Shutdown',
+        state: 'Booted',
         name: 'iPhone 8'
       }
     ]
@@ -71,7 +71,7 @@ const EXPECTED_RESULT = {
       udid: '39C9E001-798A-45B9-A7F1-4B6D4C43D6B7',
       isAvailable: true,
       deviceTypeIdentifier: 'com.apple.CoreSimulator.SimDeviceType.iPhone-8',
-      state: 'Shutdown',
+      state: 'Booted',
       name: 'iPhone 8'
     }
   ]
@@ -87,4 +87,19 @@ test('Test that an empty object is returned when passing no arch', async () => {
   shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices([], false)
   expect(deviceList).toStrictEqual({})
+})
+
+test('Test that available devices can be filtered by architecture', async () => {
+  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
+  const deviceList = await getAvailableDevices(['iOS'], false)
+  expect(Object.keys(deviceList)).toStrictEqual(['iOS-15-0'])
+  expect(deviceList['iOS-15-0']).toStrictEqual(EXPECTED_RESULT['iOS-15-0'])
+})
+
+test('Test that available devices can be filtered by their boot status', async () => {
+  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
+  const deviceList = await getAvailableDevices(['iOS', 'watchOS', 'tvOS'], true)
+  expect(deviceList['iOS-15-0']).toStrictEqual(EXPECTED_RESULT['iOS-15-0'])
+  expect(deviceList['watchOS-8-0']).toHaveLength(0)
+  expect(deviceList['tvOS-15-0']).toHaveLength(0)
 })
