@@ -14,10 +14,13 @@
     },
     "bin": "./index.js",
     "devDependencies": {
-        "standard": "^16.0.4"
+        "standard": "^16.0.4",
+        "vitest": "0.0.113"
     },
     "scripts": {
-        "lint": "standard --fix"
+        "lint": "standard --fix",
+        "test": "vitest",
+        "coverage": "vitest --coverage"
     },
     "eslintConfig": {
         "extends": "standard"
