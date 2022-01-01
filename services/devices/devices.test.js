@@ -79,27 +79,25 @@ const EXPECTED_RESULT = {
   ]
 }
 
+beforeAll(() => shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE)))
+
 test('Test response returns all device architectures', async () => {
-  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices(['iOS', 'watchOS', 'tvOS'], false)
   expect(deviceList).toStrictEqual(EXPECTED_RESULT)
 })
 
 test('Test that an empty object is returned when passing no arch', async () => {
-  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices([], false)
   expect(deviceList).toStrictEqual({})
 })
 
 test('Test that available devices can be filtered by architecture', async () => {
-  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices(['iOS'], false)
   expect(Object.keys(deviceList)).toStrictEqual(['iOS-15-0'])
   expect(deviceList['iOS-15-0']).toStrictEqual(EXPECTED_RESULT['iOS-15-0'])
 })
 
 test('Test that available devices can be filtered by their boot status', async () => {
-  shell.mockResolvedValue(JSON.stringify(MOCK_RESPONSE))
   const deviceList = await getAvailableDevices(['iOS', 'watchOS', 'tvOS'], true)
   expect(deviceList['iOS-15-0']).toStrictEqual(EXPECTED_RESULT['iOS-15-0'])
   expect(deviceList['watchOS-8-0']).toHaveLength(0)
