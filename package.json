@@ -15,13 +15,15 @@
     "bin": "./index.js",
     "devDependencies": {
         "jest": "^27.4.5",
+        "pkg": "5.5.1",
         "standard": "^16.0.4"
     },
     "scripts": {
         "lint": "standard",
         "lint:fix": "standard --fix",
         "test": "jest",
-        "coverage": "jest --coverage"
+        "coverage": "jest --coverage",
+        "package": "pkg package.json"
     },
     "eslintConfig": {
         "extends": "standard",
@@ -29,5 +31,13 @@
             "node": true,
             "jest": true
         }
+    },
+    "pkg": {
+        "targets": [
+            "node14-linux-x64",
+            "node14-macos-x64",
+            "node14-win-x64"
+        ],
+        "outputPath": "release"
     }
 }
