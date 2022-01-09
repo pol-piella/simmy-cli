@@ -1,0 +1,20 @@
+name: Run unit tests
+on: 
+  push:
+    tags:
+    - '*'
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '14'
+    - run: npm install && npm run package
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "simmy-cli.tar.tgz"
+        token: ${{ secrets.GITHUB_TOKEN }}

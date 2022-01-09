@@ -1,5 +1,5 @@
 {
-    "name": "simmy",
+    "name": "simmy-cli",
     "version": "1.0.0",
     "description": "📱 A user-friendly wrapper around the simctl interface, which allows you to talk to simulators in a very modern fashion.",
     "main": "index.js",
@@ -23,7 +23,7 @@
         "lint:fix": "standard --fix",
         "test": "jest",
         "coverage": "jest --coverage",
-        "package": "rm -rf release && pkg package.json"
+        "package": "rm -rf simmy-cli && pkg package.json && tar -zcvf simmy-cli.tar.tgz simmy-cli && rm -rf simmy-cli"
     },
     "eslintConfig": {
         "extends": "standard",
@@ -37,6 +37,6 @@
             "node14-macos-x64",
             "node14-macos-arm64"
         ],
-        "outputPath": "release"
+        "outputPath": "simmy-cli"
     }
 }
