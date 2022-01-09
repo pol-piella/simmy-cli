@@ -1,6 +1,6 @@
 {
     "name": "simmy-cli",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "📱 A user-friendly wrapper around the simctl interface, which allows you to talk to simulators in a very modern fashion.",
     "main": "index.js",
     "author": "Pol Piella Abadia <hi@polpiella.dev> (https://polpiella.dev)",
