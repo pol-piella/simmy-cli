@@ -5,7 +5,7 @@ on:
     - '*'
 jobs:
   create-release:
-    runs-on: macos-latest
+    runs-on: macos-11
     permissions:
       contents: write
     steps:
